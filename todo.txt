@@ -1,0 +1,12 @@
+print last loaded label for a config type
+
+use .gitignore like description for config type descriptors
+    handle directories
+    support ignore files
+    support some variables (e.g., $HOME)
+
+able to load config type descriptors from some remote repository
+
+support templated config files for portability
+    example problem in .gitignore
+        "excludesfile = /Users/gergoroth/.gitignore_global"
