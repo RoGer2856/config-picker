@@ -3,55 +3,55 @@ use clap::Parser;
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct StoreParams {
-    #[arg(short, long)]
-    pub(crate) name: String,
+    #[arg(index = 1)]
+    pub(crate) config_type_name: String,
 
-    #[arg(short, long)]
+    #[arg(index = 2)]
     pub(crate) label: String,
 }
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct LoadParams {
-    #[arg(short, long)]
-    pub(crate) name: String,
+    #[arg(index = 1)]
+    pub(crate) config_type_name: String,
 
-    #[arg(short, long)]
+    #[arg(index = 2)]
     pub(crate) label: String,
 }
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct ListParams {
-    #[arg(short, long)]
-    pub(crate) name: Option<String>,
+    #[arg(index = 1)]
+    pub(crate) config_type_name: Option<String>,
 }
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 pub struct CreateTypeParams {
-    #[arg(short, long)]
-    pub(crate) name: String,
+    #[arg(index = 1)]
+    pub(crate) config_type_name: String,
 }
 
 // #[derive(Parser)]
 // #[command(version, about, long_about = None)]
 // pub struct CopyLabelParams {
-//     #[arg(short, long)]
-//     pub(crate) name: String,
+//     #[arg(index = 1)]
+//     pub(crate) config_type_name: String,
 
-//     #[arg(short, long)]
+//     #[arg(index = 2)]
 //     pub(crate) label: String,
 
-//     #[arg(short, long)]
+//     #[arg(index = 3)]
 //     pub(crate) new_label: String,
 // }
 
 // #[derive(Parser)]
 // #[command(version, about, long_about = None)]
 // pub struct WhichParams {
-//     #[arg(short, long)]
-//     pub(crate) name: String,
+//     #[arg(index = 1)]
+//     pub(crate) config_type_name: String,
 // }
 
 #[derive(Parser)]
