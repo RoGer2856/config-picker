@@ -6,6 +6,8 @@ mod error;
 mod utils;
 mod variable_resolver;
 
+use std::process::ExitCode;
+
 use clap::Parser;
 
 use ::directories::BaseDirs;
@@ -13,7 +15,21 @@ use cli::{Cli, CreateTypeParams, ListParams, LoadParams, StoreParams};
 use config_storage::ConfigStorage;
 use variable_resolver::VariableResolver;
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> ExitCode {
+    env_logger::Builder::new()
+        .filter_level(log::LevelFilter::Info)
+        .init();
+
+    match app_main() {
+        Ok(_) => ExitCode::SUCCESS,
+        Err(e) => {
+            log::error!("{}", e);
+            ExitCode::FAILURE
+        }
+    }
+}
+
+fn app_main() -> Result<(), Box<dyn std::error::Error>> {
     let cli = Cli::parse();
 
     let base_dirs = BaseDirs::new().unwrap();
