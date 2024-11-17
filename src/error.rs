@@ -3,6 +3,7 @@
 use std::path::PathBuf;
 
 use thiserror::Error;
+use variable_resolver::error::DecodeStringError;
 
 #[derive(Debug, Error)]
 pub enum EnsureDirectoryError {
@@ -271,26 +272,4 @@ pub enum ReadConfigTypeDescriptorError {
         #[from]
         serde_json::Error,
     ),
-}
-
-#[derive(Debug, Error, Eq, PartialEq)]
-pub enum CollectBlocksFromStringError {
-    #[error("opened block is note closed, block start offset = {block_start_offset}")]
-    OpenedBlockIsNotClosed { block_start_offset: usize },
-}
-
-#[cfg_attr(test, derive(Eq, PartialEq))]
-#[derive(Debug, Error)]
-pub enum DecodeStringError {
-    #[error("could not resolve variable, variable name = {variable_name}")]
-    CouldNotResolveVariable { variable_name: String },
-
-    #[error("could not collect blocks from string, error = {0}")]
-    CollectBlocksFromStringError(#[source] CollectBlocksFromStringError),
-}
-
-impl From<CollectBlocksFromStringError> for DecodeStringError {
-    fn from(value: CollectBlocksFromStringError) -> Self {
-        Self::CollectBlocksFromStringError(value)
-    }
 }
